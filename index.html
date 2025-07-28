@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Переводчик RU → KK</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 30px;
+      background: #f9f9f9;
+    }
+    textarea, input {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    pre {
+      background: #fff;
+      padding: 15px;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Генератор описания RU | KK</h2>
+
+  <form id="form">
+  <textarea id="textInput" placeholder="Введите название блюда"></textarea>
+  <button type="submit">Перевести и сгенерировать</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+  document.getElementById("form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const text = document.getElementById("textInput").value;
+    const response = await fetch("https://script.google.com/macros/s/AKfycbwCWzbfN8CibVFyz92g1hb_MRhzvo5uklqi-DIzHqFcNWwPGRtI50d9FeHRIcdrFpd-_Q/exec", {
+      method: "POST",
+      body: JSON.stringify({ text: text }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    const result = await response.text();
+    document.getElementById("result").textContent = result;
+  });
+</script>
+
+
+</body>
+</html>
